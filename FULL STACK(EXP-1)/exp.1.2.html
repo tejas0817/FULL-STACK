@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #b1 {background-color: red;
+        }
+        #b2 {background-color: blue;} 
+    </style>
+</head>
+<body>
+<h2>Balance : $ <span id="balance"></span></h2>
+    <label for="amount">Amount</label> <br><br>
+
+    <input type= "number" placeholder="enter amount" id="amount">
+    <br><br>
+    <button id="b1" onclick="deposit()">Deposit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="b2" onclick="withdraw()">Withdraw</button>
+    <p id="message"></p>
+</body>
+<script>
+    let balance= 0;
+    function deposit(){
+        let paisa= document.getElementById('amount').value;
+        if(paisa>0){
+            balance=balance + Number(paisa);
+            document.getElementById('balance').innerText=balance;
+            document.getElementById('message').innerText="paisa prapth";
+
+        } else{ 
+            document.getElementById('message').innerText = "Enter a valid Amount";
+        }
+    document.getElementById('amount').value="";
+    }
+    function withdraw(){
+        let paisa= document.getElementById('amount').value;
+        if(paisa>0 && paisa<=balance){
+            balance=balance - Number(paisa);
+            document.getElementById('balance').innerText=balance;
+            document.getElementById('message').innerText="Withdraw Successfull";
+
+        } else{ 
+            document.getElementById('message').innerText = "Enter a valid Amount";
+        }
+    document.getElementById('amount').value="";
+    }
+</script>
+</html>
