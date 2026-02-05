@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product Filter</title>
+    <link rel="stylesheet" href="Experiment1_2_2.css">
+</head>
+<body>
+    <div class="container">
+        <header class="filter-head">
+            <h2>Product Filter</h2>
+            <div>
+                <label for="category">Filter By :</label>
+                <select id="category">
+                    <option value="all">All</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                </select>
+            </div>
+        </header>
+        <hr>
+        <section class="products" id="productGrid">
+            <div class="card" data-category="electronics">
+                <h2>Wireless HeadPhone</h2>
+                <p class="price">$129.99</p>
+                <p class="category">electronics</p>
+            </div>
+            <div class="card" data-category="clothing">
+                <h2>Cotton T-Shirt</h2>
+                <p class="price">$24.99</p>
+                <p class="category">clothing</p>
+            </div>
+            <div class="card" data-category="electronics">
+                <h2>Bluetooth Speaker</h2>
+                <p class="price">$89.99</p>
+                <p class="category">electronics</p>
+            </div>
+            <div class="card" data-category="clothing">
+                <h2>Denim Jeans</h2>
+                <p class="price">$59.99</p>
+                <p class="category">clothing</p>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+    let filterDropdown = document.getElementById('category');
+    let products = document.querySelectorAll('.card');
+
+    filterDropdown.addEventListener("change", function(){
+        let selectedCategory = this.value;
+
+        products.forEach(card=>{
+            let cardcategory = card.getAttribute("data-category");
+
+            if(selectedCategory=="all" || selectedCategory === cardcategory){
+                card.style.display = "block";
+            }
+            else{
+                card.style.display = "none";
+            }
+
+        });
+
+
+    });
+
+</script>
+</html>

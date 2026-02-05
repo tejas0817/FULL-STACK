@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Live Character Counter</title>
+    </head>
+    <body>
+        <h1>Live Character Counter</h1>
+        <textarea id="a" rows="10" cols="50" oninput="live()"></textarea>
+        <p>Total Character: <span id="c"></span>/100</p>
+    </body>
+    <script>
+        function live(){
+            let a =document.getElementById('a').value.length;
+            document.getElementById('c').innerText=a;
+        }
+    </script>
+</html>

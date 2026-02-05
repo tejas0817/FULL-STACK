@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Drawing Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        svg {
+            border: 2px dashed #aaa;
+            width: 80vw;
+            height: 60vh;
+            cursor: crosshair;
+        }
+        button, select {
+            margin: 10px;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>SVG Drawing Tool</h2>
+
+<select id="colorPicker">
+    <option value="blue">Blue</option>
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="black">Black</option>
+</select>
+
+<button onclick="undo()">Undo</button>
+
+<p>Circles drawn: <span id="count">0</span></p>
+
+<svg id="svgCanvas"></svg>
+
+<script>
+    const svg = document.getElementById("svgCanvas");
+    const colorPicker = document.getElementById("colorPicker");
+    const countText = document.getElementById("count");
+
+    let circles = [];
+
+    function getMousePosition(evt) {
+        let pt = svg.createSVGPoint();
+        pt.x = evt.clientX;
+        pt.y = evt.clientY;
+        return pt.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    svg.addEventListener("click", function (evt) {
+        let pos = getMousePosition(evt);
+
+        let circle = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle"
+        );
+
+        circle.setAttribute("cx", pos.x);
+        circle.setAttribute("cy", pos.y);
+        circle.setAttribute("r", 8);
+        circle.setAttribute("fill", colorPicker.value);
+
+        svg.appendChild(circle);
+        circles.push(circle);
+
+        countText.textContent = circles.length;
+    });
+
+    function undo() {
+        if (circles.length > 0) {
+            let last = circles.pop();
+            svg.removeChild(last);
+            countText.textContent = circles.length;
+        }
+    }
+</script>
+
+</body>
+</html>
